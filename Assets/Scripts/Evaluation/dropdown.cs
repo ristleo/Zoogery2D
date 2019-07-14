@@ -10,7 +10,7 @@ public class dropdown : MonoBehaviour //, IPointerEnterHandler, IPointerExtiHand
     // Start is called before the first frame update
     void Start()
     {
-        container = transform.FindChild("Container").GetComponent<RectTransform>();
+        container = transform.Find("Container").GetComponent<RectTransform>();
         isOpen = false;
 
 

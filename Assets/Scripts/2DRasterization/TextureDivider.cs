@@ -9,11 +9,14 @@ public class TextureDivider : MonoBehaviour
     public Texture2D source;
     public int part_size = 128;
 
+
+    private float scale;
     private Vector2 initial_pos;
 
     // Use this for initialization
     void Start()
     {
+        scale = 1.0F;
         int width = source.width;
         int height = source.height;
         if (width != height)
@@ -30,6 +33,7 @@ public class TextureDivider : MonoBehaviour
         int y_parts = height / part_size;
         float margins = part_size / 100.0f;
         GameObject spritesRoot = GameObject.Find("SpritesRoot");
+        Vector2 offset = new Vector2(spritesRoot.transform.position.x, spritesRoot.transform.position.y);
         initial_pos = spritesRoot.GetComponent<Rigidbody2D>().position;
 
         for (int i = 0; i < x_parts; i++)
@@ -44,7 +48,9 @@ public class TextureDivider : MonoBehaviour
                 BoxCollider2D bc = n.AddComponent(typeof(BoxCollider2D)) as BoxCollider2D;
                 SpriteRenderer sr = n.AddComponent<SpriteRenderer>();
                 sr.sprite = newSprite;
-                n.transform.position = new Vector3(i * margins - 1.2f, j * margins - 3.47f, 0);
+                n.transform.localScale = new Vector3(scale, scale, 1);
+                Debug.Log(n.transform.localScale);
+                n.transform.position = new Vector3(offset.x+i * scale*margins - 1.2f, offset.y+j *scale* margins - 3.47f, 0);
                 n.transform.parent = spritesRoot.transform;
             }
         }

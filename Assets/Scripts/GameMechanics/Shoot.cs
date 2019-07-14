@@ -1,17 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityStandardAssets.CrossPlatformInput;
 public class Shoot : MonoBehaviour
 {
-    public Transform projectileSpawn;
+    static Transform projectileSpawn;
+    public GameObject spawnFromGameObject;
     public GameObject projectile;
     public float nextFire = 1.0f;
     public float currentTime = 0.0f;
     // Start is called before the first frame update
     void Start()
     {
-        projectileSpawn = this.gameObject.transform;
+        projectileSpawn = spawnFromGameObject.transform;
     }
 
     // Update is called once per frame
@@ -23,8 +24,9 @@ public class Shoot : MonoBehaviour
     public void shoot()
     {
         currentTime += Time.deltaTime;
-
-        if(Input.GetButton("Fire1") && currentTime > nextFire)
+        bool button = CrossPlatformInputManager.GetButton("ShootButton");
+        Debug.Log(button);
+        if (button && currentTime > nextFire)
         {
             nextFire += currentTime;
             Instantiate(projectile, projectileSpawn.position, Quaternion.FromToRotation(Vector3.right, transform.right));

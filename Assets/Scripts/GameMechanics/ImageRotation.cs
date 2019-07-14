@@ -22,6 +22,6 @@ public class ImageRotation : MonoBehaviour
 
     public void SpinImage()
     {
-        image.AddTorque(-Input.GetAxis("Horizontal") * rotationalSpeed, ForceMode2D.Force);
+        image.AddTorque(1 * rotationalSpeed, ForceMode2D.Force);
     }
 }

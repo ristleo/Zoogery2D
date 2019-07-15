@@ -37,7 +37,7 @@ public class MoveProjectile : MonoBehaviour
         Collider2D col_child = col.contacts[0].collider;
         if (col_child.gameObject.tag == "Fragment")
         {
-            col_child.gameObject.SetActive(false);
+            Destroy(col_child.gameObject);
             this.gameObject.SetActive(false);
         }
     }

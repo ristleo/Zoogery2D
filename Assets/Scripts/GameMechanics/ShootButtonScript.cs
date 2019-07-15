@@ -14,23 +14,20 @@ public class ShootButtonScript : MonoBehaviour
     void Start()
     {
         projectileSpawn = spawnFromGameObject.transform;
-        Debug.Log(projectileSpawn);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        currentTime += Time.deltaTime;
     }
     public void shoot()
     {
-        currentTime += Time.deltaTime;
 
-        if (true)//(currentTime > nextFire)
+        if (currentTime > nextFire)
         {
-            Debug.Log("Servus");
             nextFire += currentTime;
-            Instantiate(projectile, projectileSpawn.position, Quaternion.FromToRotation(Vector3.right, transform.right));
+            Instantiate(projectile, projectileSpawn.position, Quaternion.Euler(0, 0, 90), spawnFromGameObject.transform);
             nextFire -= currentTime;
             currentTime = 0.0f;
         }
